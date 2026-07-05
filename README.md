@@ -143,11 +143,3 @@ If successful, attacker could compromise the system.
 * Deploy in cloud environment (AWS)
 * Add real-time alert notifications
 
----
-
-## 👤 Author
-
-**rohith joginpelly**
-Cybersecurity | SOC | SIEM Enthusiast
-
----
