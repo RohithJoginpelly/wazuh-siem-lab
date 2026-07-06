@@ -1,4 +1,3 @@
-Here is a polished README you can paste into your **Wazuh SIEM Lab** repo. It is structured to look more professional, recruiter-friendly, and easy to scan, while keeping your screenshots and incident analysis front and center. [github](https://github.com/Pontipek/Wazuh-SIEM-Lab/blob/main/README.md)
 
 # Wazuh SIEM Lab
 
