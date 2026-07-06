@@ -1,145 +1,170 @@
-# 🔐 Wazuh SIEM Lab (SOC Project)
+Here is a polished README you can paste into your **Wazuh SIEM Lab** repo. It is structured to look more professional, recruiter-friendly, and easy to scan, while keeping your screenshots and incident analysis front and center. [github](https://github.com/Pontipek/Wazuh-SIEM-Lab/blob/main/README.md)
 
-## 📌 Overview
+# Wazuh SIEM Lab
 
-This project demonstrates the deployment, configuration, and practical use of a **Security Information and Event Management (SIEM)** system using Wazuh.
 
-The goal of this lab is to simulate real-world cyber attacks and analyze how a SOC (Security Operations Center) detects and responds to them using log monitoring and alerting.
 
----
+## Overview
 
-## 🎯 Project Objective
+This project demonstrates the deployment and use of a Security Information and Event Management (SIEM) platform using Wazuh. The goal of the lab was to simulate common attacker behavior, generate security events, and analyze how a SOC detects and responds to suspicious activity using centralized log monitoring and alerting. [documentation.wazuh](https://documentation.wazuh.com/current/index.html)
 
-* Deploy a working SIEM environment
-* Collect and analyze system and security logs
-* Simulate common cyber attacks
-* Detect threats using Wazuh rules
-* Perform basic incident analysis
+## Project Objective
 
----
+- Deploy a working SIEM environment.
+- Collect and analyze system and security logs.
+- Simulate common cyber attacks.
+- Detect threats using Wazuh rules.
+- Perform basic incident analysis.
 
-## 🏗️ Architecture
+## Lab Architecture
 
-```
-[ Windows Server ] ---> Wazuh Agent  
-[ Ubuntu Server ] ---> Wazuh Manager ---> Wazuh Indexer ---> Dashboard  
-                        ↑  
+```text
+[ Windows Server ] ---> Wazuh Agent
+[ Ubuntu Server ] ---> Wazuh Manager ---> Wazuh Indexer ---> Dashboard
+                        ↑
                    Log Sources (auth.log, system logs)
 ```
 
----
+## Setup
 
-## ⚙️ Setup
+- Installed Wazuh Manager, Indexer, and Dashboard.
+- Configured the Wazuh Agent on Windows Server.
+- Fixed SSL and authentication issues.
+- Connected all components successfully.
+- Verified that all services were running.
 
-* Installed Wazuh Manager, Indexer, and Dashboard
-* Configured Wazuh Agent on Windows Server
-* Fixed SSL and authentication issues
-* Connected all components successfully
-* Verified all services are running
+## Attack Simulation
 
----
+The following attack scenarios were simulated to generate security events:
 
-## ⚔️ Attack Simulation
-
-The following attacks were simulated to generate security events:
-
-* Failed SSH login attempts (Brute-force simulation)
-* Invalid user login attempts
-* Sudo privilege escalation attempts
-* File integrity monitoring (test file creation)
+- Failed SSH login attempts.
+- Invalid user login attempts.
+- Sudo privilege escalation attempts.
+- File integrity monitoring through test file creation.
 
 Example commands used:
 
-```
+```bash
 sudo -k
-sudo ls (wrong password)
+sudo ls
 ssh fakeuser@localhost
 sudo useradd attacker
 touch /etc/test_alert
 ```
 
----
+## Alert Detection
 
-## 🚨 Alert Detection
+The Wazuh dashboard captured the simulated activity and generated alerts for authentication failures, brute-force style behavior, privilege escalation attempts, and file integrity monitoring events. [wazuh](https://wazuh.com)
 
-### 🔍 Wazuh Alert Dashboard
+## Incident Analysis
 
-![Wazuh Alerts](screenshots/wazuh-alert-dashboard.png)
+### SSH Brute Force Attack
 
-### Observations:
-
-* Multiple authentication failures detected
-* Brute-force attack patterns identified
-* Sudo privilege escalation events logged
-* Alerts mapped to MITRE ATT&CK techniques
-
----
-
-## 🧠 Incident Analysis
-
-### 🔴 Incident: SSH Brute Force Attack
-
-**Attack Method:**
-Repeated login attempts using an invalid user.
+**Attack Method:** Multiple failed SSH login attempts using an invalid user.
 
 **Logs Observed:**
-
-* Failed password attempts
-* Invalid user login messages
-* Connection closed after multiple failures
+- Failed password for invalid user.
+- Connection closed after repeated attempts.
 
 **Wazuh Detection:**
-
-* Rule triggered: Authentication failure
-* Alert level: Medium severity
+- Authentication failure alerts generated.
 
 **Analysis:**
-This behavior indicates a brute-force attack attempting to gain unauthorized access.
-
-**Impact:**
-If successful, attacker could compromise the system.
+This indicates a brute-force attack attempting to guess login credentials.
 
 **Mitigation:**
+- Use SSH key authentication.
+- Disable password login.
+- Implement Fail2Ban.
 
-* Disable password-based SSH login
-* Use SSH key authentication
-* Implement IP blocking (e.g., Fail2Ban)
+### Sudo Authentication Failure
 
----
+**Attack Method:** Incorrect sudo password attempts.
 
-## 🛠️ Tools Used
+**Logs Observed:**
+- sudo authentication failure logs.
 
-* Wazuh SIEM
-* Ubuntu Linux
-* Windows Server
-* SSH
-* Filebeat (log forwarding)
+**Wazuh Detection:**
+- Privilege escalation alerts triggered.
 
----
+**Analysis:**
+This shows an unauthorized attempt to gain root access.
 
-## 📊 Results
+**Mitigation:**
+- Limit sudo access.
+- Enable logging and monitoring.
+- Review privileged accounts regularly.
 
-* Successfully generated and monitored real-time alerts
-* Detected multiple attack patterns
-* Verified alert severity levels in dashboard
-* Demonstrated log collection and analysis workflow
+### File Integrity Monitoring
 
----
+**Action:** Created a file in `/etc`.
 
-## 🎓 Skills Gained
+**Logs Observed:**
+- File creation detected.
 
-* SIEM deployment and configuration
-* Log analysis and monitoring
-* Security event detection
-* Attack simulation techniques
-* Basic incident response
+**Wazuh Detection:**
+- File integrity alert generated.
 
----
+**Analysis:**
+This shows that system file monitoring is active and able to detect changes in critical directories.
 
-## 🚀 Future Improvements
+**Mitigation:**
+- Monitor critical directories.
+- Alert on unauthorized changes.
+- Investigate all unexpected file modifications.
 
-* Implement automated response (IP blocking using Fail2Ban)
-* Integrate additional log sources (web server, firewall)
-* Deploy in cloud environment (AWS)
-* Add real-time alert notifications
+## Evidence
 
+### Wazuh Alert Dashboard
+
+
+
+### SSH Brute Force Evidence
+
+
+
+### Sudo Failure Evidence
+
+
+
+### File Integrity Monitoring Evidence
+
+
+
+## Results
+
+- Successfully generated and monitored real-time alerts.
+- Detected multiple attack patterns.
+- Verified alert severity levels in the dashboard.
+- Demonstrated log collection and analysis workflow.
+- Mapped incident activity to common SOC-style response actions.
+
+## Skills Gained
+
+- SIEM deployment and configuration.
+- Log analysis and monitoring.
+- Security event detection.
+- Attack simulation techniques.
+- Basic incident response.
+- File integrity monitoring.
+- SSH and privilege escalation analysis.
+
+## Tools Used
+
+- Wazuh SIEM.
+- Ubuntu Linux.
+- Windows Server.
+- SSH.
+- Filebeat.
+
+## Future Improvements
+
+- Implement automated response with Fail2Ban.
+- Integrate additional log sources such as web server or firewall logs.
+- Add MITRE ATT&CK mapping to alerts.
+- Deploy in a cloud environment such as AWS.
+- Add real-time alert notifications.
+
+## Conclusion
+
+This lab demonstrates how a SIEM can collect logs, detect suspicious behavior, and support SOC-style incident analysis. It shows the importance of centralized monitoring, alert triage, and continuous hardening of endpoints and infrastructure. [documentation.wazuh](https://documentation.wazuh.com/current/index.html)
