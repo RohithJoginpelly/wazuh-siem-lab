@@ -5,7 +5,7 @@
 
 ## Overview
 
-This project demonstrates the deployment and use of a Security Information and Event Management (SIEM) platform using Wazuh. The goal of the lab was to simulate common attacker behavior, generate security events, and analyze how a SOC detects and responds to suspicious activity using centralized log monitoring and alerting. [documentation.wazuh](https://documentation.wazuh.com/current/index.html)
+This project demonstrates the deployment and use of a Security Information and Event Management (SIEM) platform using Wazuh. The goal of the lab was to simulate common attacker behavior, generate security events, and analyze how a SOC detects and responds to suspicious activity using centralized log monitoring and alerting.
 
 ## Project Objective
 
@@ -53,7 +53,7 @@ touch /etc/test_alert
 
 ## Alert Detection
 
-The Wazuh dashboard captured the simulated activity and generated alerts for authentication failures, brute-force style behavior, privilege escalation attempts, and file integrity monitoring events. [wazuh](https://wazuh.com)
+The Wazuh dashboard captured the simulated activity and generated alerts for authentication failures, brute-force style behavior, privilege escalation attempts, and file integrity monitoring events. 
 
 ## Incident Analysis
 
@@ -166,4 +166,4 @@ This shows that system file monitoring is active and able to detect changes in c
 
 ## Conclusion
 
-This lab demonstrates how a SIEM can collect logs, detect suspicious behavior, and support SOC-style incident analysis. It shows the importance of centralized monitoring, alert triage, and continuous hardening of endpoints and infrastructure. [documentation.wazuh](https://documentation.wazuh.com/current/index.html)
+This lab demonstrates how a SIEM can collect logs, detect suspicious behavior, and support SOC-style incident analysis. It shows the importance of centralized monitoring, alert triage, and continuous hardening of endpoints and infrastructure. [documentation.wazuh]
